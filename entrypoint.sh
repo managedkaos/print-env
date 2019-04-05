@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cat $SCRIPT_PATH $EVENT_PATH
+cat $GITHUB_EVENT_PATH

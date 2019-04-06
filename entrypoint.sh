@@ -1,6 +1,10 @@
 #!/bin/sh
 
 # print the environment
+echo "-----------------------------------------------------------"
+echo "Printing environment variables"
+echo "-----------------------------------------------------------"
+
 /usr/bin/env
 
 #
@@ -13,7 +17,7 @@
 #
 # set EVENT_DATA_PATH = $GITHUB_EVENT_PATH
 #
-if [ ! -z "$GITHUB_EVENT_PATH" ];
+if [ -n "$GITHUB_EVENT_PATH" ];
 then
     EVENT_PATH=$GITHUB_EVENT_PATH
 #
@@ -30,13 +34,12 @@ then
 # If no file is available for processing, exit with an error
 #
 else
-    echo "No JSON data to process"
+    echo "No JSON data to process. :("
     exit 1
 fi
 
-
 echo "-----------------------------------------------------------"
-echo "Processing $EVENT_PATH"
+echo "Printing $EVENT_PATH"
 echo "-----------------------------------------------------------"
 
 jq . < $EVENT_PATH

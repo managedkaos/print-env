@@ -1,13 +1,18 @@
-FROM ubuntu:18.10
+FROM alpine
 
+LABEL "maintainer"="managedkaos"
+LABEL "repository"="https://github.com/managedkaos/print-env"
 LABEL "com.github.actions.name"="Print Env"
 LABEL "com.github.actions.description"="Print the environment for this event"
 LABEL "com.github.actions.icon"="briefcase"
+LABEL "com.github.actions.color"="purple"
 
-RUN apt-get update
-RUN apt-get -y install jq
+RUN apk add --no-cache \
+        bash \
+        jq && \
+        which bash && \
+        which jq
 
-COPY entrypoint.sh /entrypoint.sh
-COPY sample_push_event.json /sample_push_event.json
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
